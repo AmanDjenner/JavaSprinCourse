@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <bean id="testBean"
+          class="org.example.TestBean">
+        <constructor-arg value="Neil"/>
+    </bean>
+
+    <bean id="musicBean"
+          class="org.example.ClasicalMusic">
+    </bean>
+    <bean id="musicRockBean"
+          class="org.example.RockMusic">
+    </bean>
+
+    <bean id="musicRapBean"
+          class="org.example.RapMusic">
+    </bean>
+
+<!--    <bean id="musicPlayer" class="org.example.MusicPlayer">-->
+<!--            <constructor-arg ref="musicRockBean"/>-->
+<!--    </bean>-->
+<context:property-placeholder location="classpath:musicPlayer.properties"/>
+<!--    //fara scope singleton-->
+<!--    <bean id="musicPlayer" class="org.example.MusicPlayer">-->
+<!--            <property name="music" ref="musicRapBean"/>-->
+<!--            <property name="name" value="${musicPlayer.name}" />-->
+<!--            <property name="volume" value="${musicPlayer.volume}" />-->
+<!--    </bean>   -->
+
+    <bean id="musicPlayer"
+          class="org.example.MusicPlayer"
+    scope="prototype">
+            <property name="music" ref="musicRapBean"/>
+            <property name="name" value="${musicPlayer.name}" />
+            <property name="volume" value="${musicPlayer.volume}" />
+    </bean>
+
+
+
+</beans>
